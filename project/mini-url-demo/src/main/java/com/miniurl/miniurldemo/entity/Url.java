@@ -14,6 +14,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+//Entity used to map the DataBase table TBL_URL
 @Table(name="tbl_url")
 @Entity
 @Getter

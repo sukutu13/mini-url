@@ -14,6 +14,12 @@ public class RetrieverLongUrlService {
     @Autowired
     IUrlRepo urlRepo;
 
+    /**
+     * Get from the database the long url from ist's id
+     * @param id - String - Url's id
+     * @return The url information or null if do not exists
+     * @throws Exception - Throws exception in case the get thows it as well
+     */
     public Url findLongUrl(String id) throws Exception {
         Optional<Url> opUrl = urlRepo.findById(id);
 

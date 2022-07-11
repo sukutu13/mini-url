@@ -1,4 +1,4 @@
-package com.miniurl.miniurldemo.handler;
+package com.miniurl.miniurldemo.util;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
@@ -9,8 +9,14 @@ import org.springframework.stereotype.Component;
 import com.miniurl.miniurldemo.entity.Url;
 
 @Component
-public class GenerateMiniUrlHandler {
+public class MD5Util {
 
+    /**
+     * Returns an hash code using the MD5 from the long url received
+     * @param url - Url - Object containing long url 
+     * @return hash code from long url
+     * @throws NoSuchAlgorithmException
+     */
     public String generateMiniUrl(Url url) throws NoSuchAlgorithmException {
         MessageDigest md = MessageDigest.getInstance("MD5");
 
