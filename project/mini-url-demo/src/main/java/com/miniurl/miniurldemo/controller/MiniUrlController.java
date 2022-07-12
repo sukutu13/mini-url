@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.miniurl.miniurldemo.service.GenerateMiniUrlService;
 import com.miniurl.miniurldemo.service.RetrieverLongUrlService;
-import com.miniurl.miniurldemo.entity.Url;
 import com.miniurl.miniurldemo.request.MiniUrlRequest;
 import com.miniurl.miniurldemo.response.Response;
 
