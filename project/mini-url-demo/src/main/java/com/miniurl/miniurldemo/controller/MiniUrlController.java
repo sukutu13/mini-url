@@ -63,6 +63,8 @@ public class MiniUrlController{
                 return new ResponseEntity<>(response,HttpStatus.NOT_ACCEPTABLE);
                 case "03":
                 return new ResponseEntity<>(response,HttpStatus.INTERNAL_SERVER_ERROR);
+                case "04":
+                return new ResponseEntity<>(response,HttpStatus.BAD_REQUEST);
                 default:
                 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
             }

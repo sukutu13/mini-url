@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class Response {
+public abstract class Response {
     
     private String code;
     private String description;

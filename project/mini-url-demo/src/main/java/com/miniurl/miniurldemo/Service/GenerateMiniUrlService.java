@@ -31,6 +31,10 @@ public class GenerateMiniUrlService {
         int iniPos = 0;
         boolean same = true;
 
+        if(null == request.getBigUrl()){
+            return MiniUrlResponseMapper.mapper(new Url(), Constants.CODE_INVALID_BODY, Constants.DESCRIPTION_INVALID_BODY);
+        }
+
         Url url = new Url();
 
         url.setBigUrl(request.getBigUrl());
