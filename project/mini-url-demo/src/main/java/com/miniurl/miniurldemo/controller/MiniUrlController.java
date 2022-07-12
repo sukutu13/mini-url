@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.miniurl.miniurldemo.service.GenerateMiniUrlService;
 import com.miniurl.miniurldemo.service.RetrieverLongUrlService;
 import com.miniurl.miniurldemo.entity.Url;
+import com.miniurl.miniurldemo.request.MiniUrlRequest;
+import com.miniurl.miniurldemo.response.Response;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,13 +29,17 @@ public class MiniUrlController{
      * @return - ResponseEntity with the url information if the url id exists in the DataBase
      */
     @GetMapping(value="/{id}")
-    public ResponseEntity<Url> getLongUrl(@PathVariable String id){
+    public ResponseEntity<Response> getLongUrl(@PathVariable String id){
         try {
-            Url url = retrieverLongUrl.findLongUrl(id);
-            if(null != url){
-                return new ResponseEntity<>(url, HttpStatus.OK);
+            Response response = retrieverLongUrl.findLongUrl(id);
+            switch(response.getCode()){
+                case "00":
+                return new ResponseEntity<>(response, HttpStatus.OK);
+                case "01":
+                return new ResponseEntity<>(response,HttpStatus.NOT_FOUND);
+                default:
+                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
             }
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -48,13 +54,19 @@ public class MiniUrlController{
      * @return - ResponseEntity with the url information including the, generated, mini url
      */
     @PostMapping(value="/minify")
-    public ResponseEntity<Url> saveLongUrl(@RequestBody Url url) {
+    public ResponseEntity<Response> saveLongUrl(@RequestBody MiniUrlRequest url) {
         try {
-            int index = url.getBigUrl().indexOf('.');
-            if(-1 == index){
-                return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+            Response response = generateMiniUrl.saveLongUrl(url);
+            switch(response.getCode()){
+                case "00":
+                return new ResponseEntity<>(response, HttpStatus.OK);
+                case "02":
+                return new ResponseEntity<>(response,HttpStatus.NOT_ACCEPTABLE);
+                case "03":
+                return new ResponseEntity<>(response,HttpStatus.INTERNAL_SERVER_ERROR);
+                default:
+                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
             }
-            return new ResponseEntity<>(generateMiniUrl.saveLongUrl(url), HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }

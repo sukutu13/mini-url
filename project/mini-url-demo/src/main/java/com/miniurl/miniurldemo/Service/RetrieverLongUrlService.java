@@ -5,8 +5,11 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.miniurl.miniurldemo.constant.Constants;
 import com.miniurl.miniurldemo.entity.Url;
+import com.miniurl.miniurldemo.mapper.LongUrlResponseMapper;
 import com.miniurl.miniurldemo.repository.IUrlRepo;
+import com.miniurl.miniurldemo.response.LongUrlResponse;
 
 @Service
 public class RetrieverLongUrlService {
@@ -20,11 +23,11 @@ public class RetrieverLongUrlService {
      * @return The url information or null if do not exists
      * @throws Exception - Throws exception in case the get thows it as well
      */
-    public Url findLongUrl(String id) throws Exception {
+    public LongUrlResponse findLongUrl(String id) throws Exception {
         Optional<Url> opUrl = urlRepo.findById(id);
 
         if(!opUrl.isPresent()){
-            return null;
+            return LongUrlResponseMapper.mapper(new Url(), Constants.CODE_URL_NOT_FOUND, Constants.DESCRIPTION_URL_NOT_FOUND);
         }
 
         Url url = opUrl.get();
@@ -33,7 +36,7 @@ public class RetrieverLongUrlService {
 
         urlRepo.save(url);
 
-        return url;
+        return LongUrlResponseMapper.mapper(url);
     }
 
 }
