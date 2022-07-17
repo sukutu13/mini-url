@@ -1,5 +1,6 @@
 package com.miniurl.miniurldemo.mapper;
 
+import com.miniurl.miniurldemo.constant.Constants;
 import com.miniurl.miniurldemo.entity.Url;
 import com.miniurl.miniurldemo.response.MiniUrlResponse;
 
@@ -17,8 +18,8 @@ public class MiniUrlResponseMapper {
         response.setId(url.getId());
         response.setTimesClicked(url.getTimesClicked());
         response.setTimesShortened(url.getTimesShortened());
-        response.setCode("00");
-        response.setDescription("Sucesso");
+        response.setCode(Constants.CODE_SUCCESS);
+        response.setDescription(Constants.DESCRIPTION_SUCCESS);
 
         return response;
     }
