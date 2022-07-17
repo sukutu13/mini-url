@@ -41,5 +41,5 @@ Request Response
 
 ## Versions
 
-*Java Version:* 17
-*Spring Boot Framework Version:* 2.7.1
+- *Java Version:* 17
+- *Spring Boot Framework Version:* 2.7.1
